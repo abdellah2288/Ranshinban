@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Dotonbori:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3c272377-77ad-493d-a63c-600ae44b9ff8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Dotonbori_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/BLE/Beacon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/BLE/Scanner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Localization/BeaconMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Localization/BeaconRegister.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Localization/RssiCalibrator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Main__.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/utils/ConfigManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/utils/Parser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/utils/SerialDebug.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/utils/SerialHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/utils/errorWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/utils/popupWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="0c5d416b-3466-46e5-a31a-4952bdf94966" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2kbqeG1vx3Wc4tepIiSucruwmTX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.start application.executor": "Run",
+    "Maven.Dotonbori [javafx:jlink].executor": "Run",
+    "Maven.Dotonbori [javafx:run].executor": "Run",
+    "Maven.Dotonbori [org.openjfx:javafx-maven-plugin:0.0.8:jlink].executor": "Run",
+    "Maven.Dotonbori [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
+    "Maven.Dotonbori [package].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/abdellah/IdeaProjects/Ranshinban",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.dotonbori.dotonbori.utils" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn javafx:jlink" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.start application">
+    <configuration name="start application" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.ranshinban.ranshinban.Main__" />
+      <module name="ranshinban" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Ranshinban" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Dotonbori [javafx:jlink]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="javafx:jlink" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="Dotonbori [javafx:run]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="javafx:run" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="Dotonbori [package]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="package" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.start application" />
+      <item itemvalue="Maven.Dotonbori [package]" />
+      <item itemvalue="Maven.Dotonbori [javafx:jlink]" />
+      <item itemvalue="Maven.Dotonbori [javafx:run]" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Maven.Dotonbori [javafx:jlink]" />
+        <item itemvalue="Maven.Dotonbori [javafx:run]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3c272377-77ad-493d-a63c-600ae44b9ff8" name="Changes" comment="" />
+      <created>1723562719137</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1723562719137</updated>
+      <workItem from="1723562720160" duration="3201000" />
+      <workItem from="1723572494805" duration="11841000" />
+      <workItem from="1723634714647" duration="2518000" />
+      <workItem from="1723709037333" duration="45668000" />
+      <workItem from="1723911971598" duration="3689000" />
+      <workItem from="1724160534905" duration="26584000" />
+      <workItem from="1724239150392" duration="21401000" />
+      <workItem from="1724316020375" duration="15049000" />
+      <workItem from="1724399427382" duration="6465000" />
+      <workItem from="1724408020527" duration="250000" />
+      <workItem from="1724408367364" duration="753000" />
+      <workItem from="1724409375926" duration="636000" />
+      <workItem from="1724410155147" duration="3569000" />
+      <workItem from="1724421940352" duration="10124000" />
+      <workItem from="1724477906392" duration="18802000" />
+      <workItem from="1724516444547" duration="13448000" />
+      <workItem from="1724566760614" duration="4789000" />
+      <workItem from="1724581346719" duration="11834000" />
+      <workItem from="1724656599953" duration="17374000" />
+      <workItem from="1724743449848" duration="1043000" />
+      <workItem from="1724746158725" duration="10627000" />
+      <workItem from="1724914605374" duration="10585000" />
+      <workItem from="1724927110506" duration="5449000" />
+      <workItem from="1725013504915" duration="2620000" />
+      <workItem from="1725032207230" duration="2916000" />
+      <workItem from="1725093845095" duration="52000" />
+      <workItem from="1725109190044" duration="3317000" />
+      <workItem from="1725180219568" duration="945000" />
+      <workItem from="1725186047547" duration="3400000" />
+      <workItem from="1725193851589" duration="24135000" />
+      <workItem from="1725274219691" duration="6822000" />
+      <workItem from="1725296264087" duration="6674000" />
+      <workItem from="1725307570823" duration="108000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

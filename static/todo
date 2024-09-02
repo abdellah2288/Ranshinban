@@ -1,0 +1,7 @@
+todo:
+0. make register a double click action on the scanner menu. [D]
+1. fix the modify button [D] 
+2. fix the trilaterate button not locking when there's less than 2 beacons[D]
+3. Draw a high resolution icon [D]
+4. Zoomable map [TBF]
+5. Colored beacon list 
