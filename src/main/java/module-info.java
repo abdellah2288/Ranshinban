@@ -10,6 +10,7 @@ module com.dotonbori.dotonbori {
     requires java.desktop;
     requires trilateration;
     requires commons.math3;
+    requires org.fxyz3d.core;
 
     opens com.ranshinban.ranshinban to javafx.fxml;
     exports com.ranshinban.ranshinban;

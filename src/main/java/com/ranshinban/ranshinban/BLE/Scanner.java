@@ -264,7 +264,7 @@ public class Scanner
         {
             if(e.getClickCount() >= 2 && scannedBeaconsTable.getSelectionModel().getSelectedItem() != null)
             {
-                BeaconRegister.setupBeacon(scannedBeaconsTable.getSelectionModel().getSelectedItem());
+                BeaconRegister.setupBeacon(scannedBeaconsTable.getSelectionModel().getSelectedItem(),false);
             }
         });
 

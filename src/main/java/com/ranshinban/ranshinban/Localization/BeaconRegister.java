@@ -29,7 +29,7 @@ public class BeaconRegister
     static private ListView<Beacon> beaconList = null;
     static private final File beaconDB = new File(System.getProperty("user.home")+"/Documents/Ranshinban","beaconDB");
 
-    public static void setupBeacon(Beacon beacon)
+    public static void setupBeacon(Beacon beacon,boolean isModifying)
     {
         Stage mainStage = new Stage();
         VBox root = new VBox();
@@ -39,11 +39,13 @@ public class BeaconRegister
         TextField beaconAddress = new TextField();
         TextField beaconXCoordinate = new TextField();
         TextField beaconYCoordinate = new TextField();
+        TextField beaconZCoordinate = new TextField();
 
         Label beaconNameLabel = new Label("Beacon Name");
         Label beaconAddressLabel = new Label("Beacon Address");
         Label beaconXCoordinateLabel = new Label("Beacon X Coordinate");
         Label beaconYCoordinateLabel = new Label("Beacon Y Coordinate");
+        Label beaconZCoordinateLabel = new Label("Beacon Z Coordinate");
 
         Button saveButton = new Button("Save");
         saveButton.setDisable(true);
@@ -56,6 +58,7 @@ public class BeaconRegister
                     {
                         Double.parseDouble(beaconXCoordinate.getText());
                         Double.parseDouble(beaconYCoordinate.getText());
+                        Double.parseDouble(beaconZCoordinate.getText());
 
                         Pattern pattern = Pattern.compile("([0-9A-Fa-f]{2}[-:]){5}([0-9A-Fa-f]{2})");
                         Matcher matcher = pattern.matcher(beaconAddress.getText());
@@ -73,8 +76,9 @@ public class BeaconRegister
         {
             try
             {
-                Double.parseDouble(newVal);
+                Double.parseDouble(beaconXCoordinate.getText());
                 Double.parseDouble(beaconYCoordinate.getText());
+                Double.parseDouble(beaconZCoordinate.getText());
 
                 Pattern pattern = Pattern.compile("([0-9A-Fa-f]{2}[-:]){5}([0-9A-Fa-f]{2})");
                 Matcher matcher = pattern.matcher(beaconAddress.getText());
@@ -91,8 +95,28 @@ public class BeaconRegister
         {
             try
             {
-                Double.parseDouble(newVal);
                 Double.parseDouble(beaconXCoordinate.getText());
+                Double.parseDouble(beaconYCoordinate.getText());
+                Double.parseDouble(beaconZCoordinate.getText());
+
+                Pattern pattern = Pattern.compile("([0-9A-Fa-f]{2}[-:]){5}([0-9A-Fa-f]{2})");
+                Matcher matcher = pattern.matcher(beaconAddress.getText());
+                saveButton.setDisable(!matcher.find());
+            }
+            catch(Exception e)
+            {
+                saveButton.setDisable(true);
+            }
+        });
+
+        beaconZCoordinate.setText(beacon.getzCoordinate().toString());
+        beaconZCoordinate.textProperty().addListener((v,oldVal,newVal)->
+        {
+            try
+            {
+                Double.parseDouble(beaconXCoordinate.getText());
+                Double.parseDouble(beaconYCoordinate.getText());
+                Double.parseDouble(beaconZCoordinate.getText());
 
                 Pattern pattern = Pattern.compile("([0-9A-Fa-f]{2}[-:]){5}([0-9A-Fa-f]{2})");
                 Matcher matcher = pattern.matcher(beaconAddress.getText());
@@ -110,11 +134,13 @@ public class BeaconRegister
             Beacon _beacon = new Beacon(beaconName.getText(),beaconAddress.getText(),0,0);
             _beacon.setxCoordinate(Double.parseDouble(beaconXCoordinate.getText()));
             _beacon.setyCoordinate(Double.parseDouble(beaconYCoordinate.getText()));
+            _beacon.setzCoordinate(Double.parseDouble(beaconZCoordinate.getText()));
             registerBeacon(_beacon
                     ,true
                     ,false
             );
             //refreshBeaconListView();
+
             mainStage.close();
         });
 
@@ -127,10 +153,19 @@ public class BeaconRegister
                 ,beaconXCoordinate
                 ,beaconYCoordinateLabel
                 ,beaconYCoordinate
+                ,beaconZCoordinateLabel
+                ,beaconZCoordinate
                 ,saveButton
         );
         root.setPadding(new Insets(10,10,10,10));
 
+        mainStage.setOnCloseRequest((event)->
+        {
+            if(isModifying)
+            {
+                if(!registeredBeacons.contains(beacon)) registerBeacon(beacon,true,false);
+            }
+        });
         mainStage.setScene(mainScene);
         mainStage.setTitle("Register beacon");
         mainStage.setWidth(500);
@@ -166,6 +201,8 @@ public class BeaconRegister
                         + ","
                         + beacon.getyCoordinate()
                         + ","
+                        + beacon.getzCoordinate()
+                        +","
                         + beacon.getReferenceRSSI()
                         + ";\n");
                 fileWriter.flush();
@@ -204,11 +241,12 @@ public class BeaconRegister
                 for(String line : lines)
                 {
                     String[] beaconData = line.split(",");
-                    if(beaconData.length < 5) continue;
+                    if(beaconData.length < 6) continue;
                     Beacon parsedBeacon = new Beacon(beaconData[0],beaconData[1],0,0);
                     parsedBeacon.setxCoordinate(Double.parseDouble(beaconData[2]));
                     parsedBeacon.setyCoordinate(Double.parseDouble(beaconData[3]));
-                    parsedBeacon.setReferenceRSSI(Integer.parseInt(beaconData[4].replaceAll(";","")));
+                    parsedBeacon.setzCoordinate(Double.parseDouble(beaconData[4]));
+                    parsedBeacon.setReferenceRSSI(Integer.parseInt(beaconData[5].replaceAll(";","")));
                     registeredBeacons.add(parsedBeacon);
                 }
             }
@@ -244,8 +282,7 @@ public class BeaconRegister
                 {
                     Beacon beacon = beaconList.getSelectionModel().getSelectedItem();
                     removeBeacon(beacon);
-                    setupBeacon(beacon);
-                    if(!checkIfRegistered(beacon)) registerBeacon(beacon,true,false);
+                    setupBeacon(beacon,true);
                 }
             }
         });
@@ -276,8 +313,7 @@ public class BeaconRegister
         {
             Beacon beacon = beaconList.getSelectionModel().getSelectedItem();
             removeBeacon(beacon);
-            setupBeacon(beacon);
-            if(!checkIfRegistered(beacon)) registerBeacon(beacon,true,false);
+            setupBeacon(beacon,true);
         });
 
 
@@ -399,8 +435,9 @@ public class BeaconRegister
 
                 BufferedWriter writer = new BufferedWriter(new FileWriter(beaconDB));
                 PrintWriter printWriter = new PrintWriter(writer);
-
                 printWriter.write(String.join("", lines));
+                printWriter.flush();
+                writer.flush();
                 printWriter.close();
                 writer.close();
             }

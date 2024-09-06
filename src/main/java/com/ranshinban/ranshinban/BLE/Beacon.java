@@ -10,6 +10,8 @@ public class Beacon
 
     private double xCoordinate = 0.0;
     private double yCoordinate = 0.0;
+    private double zCoordinate = 0.0;
+
     private double radius = 0.0;
     private int referenceRSSI = 0;
 
@@ -77,6 +79,9 @@ public class Beacon
     {
         this.yCoordinate = yCoordinate;
     }
+
+    public Double getzCoordinate(){return zCoordinate;}
+    public void setzCoordinate(Double zCoordinate){this.zCoordinate = zCoordinate;}
 
     public int getReferenceRSSI()
     {

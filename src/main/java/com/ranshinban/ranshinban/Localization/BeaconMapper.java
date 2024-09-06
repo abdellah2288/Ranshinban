@@ -5,9 +5,13 @@ import com.ranshinban.ranshinban.BLE.Scanner;
 import com.ranshinban.ranshinban.utils.errorWindow;
 import javafx.application.Platform;
 import com.lemmingapex.trilateration.*;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.css.converter.PaintConverter;
 import javafx.geometry.Insets;
+import javafx.geometry.Point3D;
+import javafx.scene.Camera;
+import javafx.scene.Group;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -15,22 +19,28 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Polyline;
+import javafx.scene.shape.Sphere;
+import javafx.scene.transform.Rotate;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.commons.math3.fitting.leastsquares.LeastSquaresOptimizer;
 import org.apache.commons.math3.fitting.leastsquares.LevenbergMarquardtOptimizer;
+import org.fxyz3d.shapes.composites.PolyLine3D;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalField;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class BeaconMapper
 {
@@ -46,17 +56,23 @@ public class BeaconMapper
     static private NumberAxis yAxis = new NumberAxis();
 
     static private LineChart<Number,Number> beaconMap = new LineChart<>(xAxis, yAxis);
+    static private HashMap<Beacon,Sphere> mapper3DObjects = new HashMap<>();
 
     static private  TableView<Beacon> beaconTable = new TableView<>();
 
     static private Stage mainStage = new Stage();
+    static private Stage mapper3DStage = new Stage();
+
+    static private Group mapper3DContainer = new Group();
+
+    static private Scene mapper3DScene = new Scene(mapper3DContainer);
 
     static private Button trilaterateButton = new Button("▶");
     static private Button logDataButton = new Button("Enable logging");
 
     static private Label positionLabel = new Label("");
 
-    static private final double  SCALE_FACTOR = 1.1;
+    static private final double  SCALE_FACTOR_3D = 25;
 
     static private boolean loggingEnabled = false;
 
@@ -68,6 +84,7 @@ public class BeaconMapper
         VBox configBox = new VBox();
 
         Button refreshButton = new Button("⟳");
+        Button display3DMapButton = new Button("3D");
 
         Label envConstLabel = new Label("Environmental Constant");
         Label circleResolutionLabel = new Label("Circle Resolution");
@@ -173,6 +190,14 @@ public class BeaconMapper
                 }
                 );
 
+        display3DMapButton.disableProperty().bind(mapper3DStage.showingProperty());
+        display3DMapButton.setOnAction(
+                e ->
+                {
+                    start3Dmapper();
+                }
+        );
+
         beaconTable.setOnMouseClicked(
                 e ->
                 {
@@ -253,13 +278,14 @@ public class BeaconMapper
                 ,positionLabel
                 ,refreshButton
                 ,logDataButton
+                ,display3DMapButton
                 , beaconTable
         );
 
         trilaterateButton.prefWidthProperty().bind(configBox.prefWidthProperty());
         refreshButton.prefWidthProperty().bind(configBox.prefWidthProperty());
         logDataButton.prefWidthProperty().bind(configBox.prefWidthProperty());
-
+        display3DMapButton.prefWidthProperty().bind(configBox.prefWidthProperty());
 
         root.getChildren().addAll(beaconMap, configBox);
 
@@ -268,13 +294,12 @@ public class BeaconMapper
         mainStage.setScene(scene);
         mainStage.setTitle("Beacon Map");
         mainStage.setMinWidth(800);
-        mainStage.setMinHeight(480);
+        mainStage.setMinHeight(600);
         mainStage.getIcons().add(new Image(BeaconMapper
                 .class
                 .getClassLoader()
                 .getResourceAsStream("ranshinban-256x256.png")));
         mainStage.show();
-
         new Thread(()-> refreshMap()).start();
     }
     static private double approximateRadius(Beacon beacon, int RSSI)
@@ -323,7 +348,9 @@ public class BeaconMapper
                         {
                             double[] coordinates = trilateratePosition();
                             Platform.runLater(()->positionLabel.setText("X: " + coordinates[0]
-                                    + "\n\nY: " + coordinates[1]));
+                                    + "\n\nY: " + coordinates[1]
+                                    +"\n\nZ: " + coordinates[2]
+                            ));
                         }
                         else if(beaconData.keySet().size() < 2)
                         {
@@ -354,6 +381,8 @@ public class BeaconMapper
                                     +","
                                     +beacon.getyCoordinate()
                                     +","
+                                    +beacon.getzCoordinate()
+                                    +","
                                     +beacon.getRadius()
                                     +"\n"
                             );
@@ -365,6 +394,26 @@ public class BeaconMapper
                         {
                             beaconData.get(beacon).getData().clear();
                             beaconData.get(beacon).getData().addAll(newSeries);
+                            if(mapper3DStage.isShowing())
+                            {
+                                if(mapper3DObjects.get(beacon) == null)
+                                {
+                                    mapper3DObjects.put(beacon,new Sphere());
+
+                                    PhongMaterial material = new PhongMaterial();
+                                    material.setDiffuseColor(Color.web("#"+macToColor(beacon.getMacAddress()),0.6));
+                                    mapper3DObjects.get(beacon).setMaterial(material);
+                                }
+                                mapper3DObjects.get(beacon).setRadius(beacon.getRadius()*SCALE_FACTOR_3D);
+                                mapper3DObjects.get(beacon).translateXProperty().set(beacon.getxCoordinate()*SCALE_FACTOR_3D);
+                                mapper3DObjects.get(beacon).translateYProperty().set(beacon.getyCoordinate()*SCALE_FACTOR_3D);
+                                mapper3DObjects.get(beacon).translateZProperty().set(beacon.getzCoordinate()*SCALE_FACTOR_3D);
+                                if(!mapper3DContainer.getChildren().contains(mapper3DObjects.get(beacon)))
+                                {
+                                    mapper3DContainer.getChildren().add(mapper3DObjects.get(beacon));
+                                }
+
+                            }
                             beaconTable.refresh();
                         }
                         );
@@ -386,7 +435,7 @@ public class BeaconMapper
         ArrayList<Double> radii = new ArrayList<>();
 
         NonLinearLeastSquaresSolver solver;
-        XYChart.Data approximatePosition = new XYChart.Data();
+        Point3D approximatePosition = new Point3D(0,0,0);
 
         if(beaconData.keySet().size() < 2)
         {
@@ -395,17 +444,18 @@ public class BeaconMapper
         }
         for(Beacon beacon : beaconData.keySet())
         {
-         centers.add(new Double[]{beacon.getxCoordinate(), beacon.getyCoordinate()});
+         centers.add(new Double[]{beacon.getxCoordinate(), beacon.getyCoordinate(), beacon.getzCoordinate()});
          radii.add(beacon.getRadius());
         }
 
-        double[][] _centers = new double[centers.size()][2];
+        double[][] _centers = new double[centers.size()][3];
         double[] _radii = new double[radii.size()];
 
         for(int i = 0; i < _centers.length; i++)
         {
             _centers[i][0] = centers.get(i)[0];
             _centers[i][1] = centers.get(i)[1];
+            _centers[i][2] = centers.get(i)[2];
         }
         for(int i = 0; i < _radii.length; i++)
         {
@@ -415,13 +465,84 @@ public class BeaconMapper
         solver = new NonLinearLeastSquaresSolver(new TrilaterationFunction(_centers,_radii), new LevenbergMarquardtOptimizer());
         LeastSquaresOptimizer.Optimum optimum = solver.solve();
         double[] solution = optimum.getPoint().toArray();
-        approximatePosition.setXValue(solution[0]);
-        approximatePosition.setYValue(solution[1]);
-
         return solution;
     }
-    static private void logData(Beacon beacon)
+    static private void start3Dmapper()
     {
+
+        Camera mainCamera = new PerspectiveCamera(true);
+
+        Rotate yRotate = new Rotate(0,Rotate.Y_AXIS);
+        Rotate xRotate = new Rotate(0,Rotate.X_AXIS);
+        Rotate zRotate = new Rotate(0,Rotate.Z_AXIS);
+
+        Line xAxis = new Line();
+        Line yAxis = new Line();
+
+        xAxis.startXProperty().bind(mapper3DScene.widthProperty().multiply(-1));
+        xAxis.endXProperty().bind(mapper3DScene.widthProperty());
+        xAxis.setStrokeWidth(0.5);
+        xAxis.setStroke(Paint.valueOf("#7FFF00"));
+
+        yAxis.startYProperty().bind(xAxis.startXProperty());
+        yAxis.endYProperty().bind(xAxis.endXProperty());
+        yAxis.setStrokeWidth(0.5);
+        yAxis.setStroke(Paint.valueOf("#FF0000"));
+
+        mapper3DContainer.getChildren().addAll(xAxis,yAxis);
+        mapper3DContainer.getTransforms().addAll(xRotate,yRotate,zRotate);
+
+        mainCamera.setNearClip(1);
+        mainCamera.setFarClip(10000);
+        mainCamera.translateXProperty().set(0);
+        mainCamera.translateYProperty().set(0);
+        mainCamera.translateZProperty().set(-100);
+
+        mapper3DScene.setCamera(mainCamera);
+        mapper3DScene.setFill(Color.web("#424242"));
+
+
+        mapper3DStage.setScene(mapper3DScene);
+        mapper3DStage.setHeight(600);
+        mapper3DStage.setWidth(800);
+        mapper3DStage.setTitle("3D mapper (Experimental)");
+        mapper3DStage.show();
+
+        mapper3DScene.setOnKeyPressed(event -> {
+           switch(event.getCode())
+           {
+               case S:
+                   mainCamera.translateZProperty().set(mainCamera.translateZProperty().get() - 10);
+                   break;
+               case W:
+                   mainCamera.translateZProperty().set(mainCamera.translateZProperty().get() + 10);
+                   break;
+               case E:
+                   yRotate.angleProperty().set(yRotate.angleProperty().get() + 2);
+                   break;
+               case Q:
+                   yRotate.angleProperty().set(yRotate.angleProperty().get() - 2);
+                   break;
+               case R:
+                   zRotate.angleProperty().set(zRotate.angleProperty().get() + 2);
+                   break;
+               case F:
+                   zRotate.angleProperty().set(zRotate.angleProperty().get() - 2);
+                   break;
+               case D:
+                   xRotate.angleProperty().set(xRotate.angleProperty().get() + 2);
+                   break;
+               case A:
+                   xRotate.angleProperty().set(xRotate.angleProperty().get() - 2);
+                   break;
+           }
+        });
+    }
+    static private String macToColor(String macAddress)
+    {
+        String strippedAddress = macAddress.replaceAll(":","").replaceAll("[A-Z:a-z]","");
+        String hexColor = String.format("%06X", ((int) Math.round(Double.parseDouble(strippedAddress))) % 16777215 );
+        return hexColor;
 
     }
 }
