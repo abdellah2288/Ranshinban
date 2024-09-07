@@ -9,14 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c272377-77ad-493d-a63c-600ae44b9ff8" name="Changes" comment="">
+    <list default="true" id="3c272377-77ad-493d-a63c-600ae44b9ff8" name="Changes" comment="Added 3D mapper, fixed bugs with the modify function.">
+      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/BLE/Beacon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/BLE/Beacon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/BLE/Scanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/BLE/Scanner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Localization/BeaconMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Localization/BeaconMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Localization/BeaconRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Localization/BeaconRegister.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +91,7 @@
       <command value="mvn javafx:jlink" />
     </option>
   </component>
-  <component name="RunManager" selected="Maven.Dotonbori [package]">
+  <component name="RunManager" selected="Application.start application">
     <configuration name="start application" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.ranshinban.ranshinban.Main__" />
       <module name="ranshinban" />
@@ -261,8 +259,19 @@
       <workItem from="1725307570823" duration="13156000" />
       <workItem from="1725558504832" duration="2641000" />
       <workItem from="1725614477975" duration="8739000" />
-      <workItem from="1725641501834" duration="1225000" />
+      <workItem from="1725641501834" duration="2125000" />
+      <workItem from="1725648644188" duration="1659000" />
+      <workItem from="1725696724544" duration="1174000" />
     </task>
+    <task id="LOCAL-00001" summary="Added 3D mapper, fixed bugs with the modify function.">
+      <option name="closed" value="true" />
+      <created>1725643536136</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1725643536136</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,5 +287,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added 3D mapper, fixed bugs with the modify function." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added 3D mapper, fixed bugs with the modify function." />
   </component>
 </project>

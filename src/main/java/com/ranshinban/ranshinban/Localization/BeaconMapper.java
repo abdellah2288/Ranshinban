@@ -6,7 +6,6 @@ import com.ranshinban.ranshinban.utils.errorWindow;
 import javafx.application.Platform;
 import com.lemmingapex.trilateration.*;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.css.converter.PaintConverter;
 import javafx.geometry.Insets;
 import javafx.geometry.Point3D;
 import javafx.scene.Camera;
@@ -25,14 +24,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.commons.math3.fitting.leastsquares.LeastSquaresOptimizer;
 import org.apache.commons.math3.fitting.leastsquares.LevenbergMarquardtOptimizer;
-import org.fxyz3d.shapes.composites.PolyLine3D;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -40,7 +37,6 @@ import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class BeaconMapper
 {
@@ -302,10 +298,12 @@ public class BeaconMapper
         mainStage.show();
         new Thread(()-> refreshMap()).start();
     }
+
     static private double approximateRadius(Beacon beacon, int RSSI)
     {
         return Math.pow(10.0,(beacon.getReferenceRSSI() - RSSI)/(10 * environmentalConstant));
     }
+
     static private XYChart.Data[] drawBeaconCircle(Beacon beacon)
     {
             Beacon _beacon =Scanner.getBeacon(beacon.getMacAddress(),true);
@@ -331,6 +329,7 @@ public class BeaconMapper
 
             return circleData.toArray(new XYChart.Data[0]);
     }
+
     static private void refreshMap()
     {
         while(mainStage.isShowing())
@@ -429,6 +428,7 @@ public class BeaconMapper
         }
         beaconMap.getData().clear();
     }
+
     static private double[] trilateratePosition()
     {
         ArrayList<Double[]> centers = new ArrayList<>();
@@ -467,9 +467,9 @@ public class BeaconMapper
         double[] solution = optimum.getPoint().toArray();
         return solution;
     }
+
     static private void start3Dmapper()
     {
-
         Camera mainCamera = new PerspectiveCamera(true);
 
         Rotate yRotate = new Rotate(0,Rotate.Y_AXIS);
@@ -538,6 +538,7 @@ public class BeaconMapper
            }
         });
     }
+
     static private String macToColor(String macAddress)
     {
         String strippedAddress = macAddress.replaceAll(":","").replaceAll("[A-Z:a-z]","");

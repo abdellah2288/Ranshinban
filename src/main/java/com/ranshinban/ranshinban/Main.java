@@ -1,10 +1,7 @@
 package com.ranshinban.ranshinban;
 
 import com.ranshinban.ranshinban.BLE.Scanner;
-import com.ranshinban.ranshinban.utils.ConfigManager;
-import com.ranshinban.ranshinban.utils.SerialHandler;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -13,8 +10,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application
 {
-    public static HBox mainPane = new HBox();
-
     public static void main(String[] args)
     {
         Application.launch(args);
@@ -37,27 +32,9 @@ public class Main extends Application
         mainStage.setTitle("Ranshinban");
         mainStage.getIcons().add(new Image(Main.class.getClassLoader().getResourceAsStream("ranshinban-256x256.png")));
         mainStage.show();
-
-        new Thread(()->
+        mainStage.setOnCloseRequest(e->
         {
-            while(mainStage.isShowing())
-            {
-                try
-                {
-                    Platform.runLater(() ->
-                    {
-
-
-                    });
-                    Thread.sleep(17);
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            SerialHandler.closePort();
             System.exit(0);
-        }).start();
+        });
     }
 }
