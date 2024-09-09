@@ -5,6 +5,7 @@ import com.ranshinban.ranshinban.BLE.Scanner;
 import com.ranshinban.ranshinban.utils.errorWindow;
 import com.ranshinban.ranshinban.utils.popupWindow;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.NumberAxis;
@@ -208,7 +209,7 @@ public class RssiCalibrator
         mainStage.getIcons().add(new Image(RssiCalibrator
                 .class
                 .getClassLoader()
-                .getResourceAsStream("ranshinban-40x40.png")));
+                .getResourceAsStream("ranshinban-256x256.png")));
         mainStage.show();
 
     }
@@ -309,8 +310,8 @@ public class RssiCalibrator
         }
         return total/sampleCounter;
     }
-    static public boolean calibrating()
+    static public ReadOnlyBooleanProperty calibrating()
     {
-        return mainStage.isShowing();
+        return mainStage.showingProperty();
     }
 }

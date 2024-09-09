@@ -1,6 +1,7 @@
 package com.ranshinban.ranshinban;
 
 import com.ranshinban.ranshinban.BLE.Scanner;
+import com.ranshinban.ranshinban.Wireless.httpClient;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -24,7 +25,6 @@ public class Main extends Application
         Scene mainScene = new Scene(scannerPanel, 800, 600);
 
         scannerPanel.prefWidthProperty().bind(mainScene.widthProperty());
-
         mainStage.setScene(mainScene);
         mainStage.setMinWidth(640);
         mainStage.setMinHeight(480);

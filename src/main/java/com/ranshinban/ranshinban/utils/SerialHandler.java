@@ -55,6 +55,7 @@ public class SerialHandler
         if(currentPort != null) currentPort.closePort();
         scannerBuffer.setLength(0);
         scanBuffer = null;
+        currentPort = null;
     }
 
     static public boolean portOpen()

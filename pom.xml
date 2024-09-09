@@ -95,6 +95,22 @@
       <artifactId>trilateration</artifactId>
       <version>1.0.2</version>
     </dependency>
+    <dependency>
+      <groupId>org.jetbrains</groupId>
+      <artifactId>annotations</artifactId>
+      <version>13.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.13</version>
+    </dependency>
+    <dependency>
+      <groupId>de.jensd</groupId>
+      <artifactId>fontawesomefx</artifactId>
+      <version>8.9</version>
+    </dependency>
   </dependencies>
   <build>
 
@@ -139,7 +155,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>com.dotonbori.dotonbori/com.ranshinban.ranshinban.Main__</mainClass>
+              <mainClass>com.ranshinban.ranshinban.Main__</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
@@ -148,6 +164,7 @@
               <noHeaderFiles>true</noHeaderFiles>
             </configuration>
           </execution>
+
         </executions>
       </plugin>
     </plugins>

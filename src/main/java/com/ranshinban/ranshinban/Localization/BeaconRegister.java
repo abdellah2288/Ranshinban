@@ -335,9 +335,14 @@ public class BeaconRegister
         Stage stage = new Stage();
 
         stage.setScene(scene);
-
+        stage.getIcons().add(
+              new Image(BeaconRegister
+                        .class
+                        .getClassLoader()
+                        .getResourceAsStream("ranshinban-256x256.png"))
+        );
         stage.sizeToScene();
-        stage.setTitle("Beacon List");
+        stage.setTitle("Registered beacons");
         stage.show();
 
     }

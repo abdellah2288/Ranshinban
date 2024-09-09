@@ -30,6 +30,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.commons.math3.fitting.leastsquares.LeastSquaresOptimizer;
 import org.apache.commons.math3.fitting.leastsquares.LevenbergMarquardtOptimizer;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -45,7 +46,6 @@ public class BeaconMapper
     static private volatile HashMap<Beacon,XYChart.Series<Number,Number>> beaconData = new HashMap<>();
 
     static private volatile boolean triLaterate = false;
-    static private volatile boolean logEnabled = false;
     static private volatile XYChart.Series target = new XYChart.Series<>();
 
     static private NumberAxis xAxis = new NumberAxis();
@@ -398,7 +398,6 @@ public class BeaconMapper
                                 if(mapper3DObjects.get(beacon) == null)
                                 {
                                     mapper3DObjects.put(beacon,new Sphere());
-
                                     PhongMaterial material = new PhongMaterial();
                                     material.setDiffuseColor(Color.web("#"+macToColor(beacon.getMacAddress()),0.6));
                                     mapper3DObjects.get(beacon).setMaterial(material);
@@ -418,7 +417,7 @@ public class BeaconMapper
                         );
                     }
                 }
-                Thread.sleep(20);
+                Thread.sleep(30);
             }
             catch (Exception e)
             {
@@ -429,6 +428,7 @@ public class BeaconMapper
         beaconMap.getData().clear();
     }
 
+    @Nullable
     static private double[] trilateratePosition()
     {
         ArrayList<Double[]> centers = new ArrayList<>();
@@ -537,6 +537,10 @@ public class BeaconMapper
                    break;
            }
         });
+        mapper3DStage.getIcons().add(new Image(BeaconMapper
+                .class
+                .getClassLoader()
+                .getResourceAsStream("ranshinban-256x256.png")));
     }
 
     static private String macToColor(String macAddress)

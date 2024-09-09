@@ -11,6 +11,10 @@ module com.dotonbori.dotonbori {
     requires trilateration;
     requires commons.math3;
     requires org.fxyz3d.core;
+    requires annotations;
+    requires org.apache.httpcomponents.httpclient;
+    requires org.apache.httpcomponents.httpcore;
+    requires fontawesomefx;
 
     opens com.ranshinban.ranshinban to javafx.fxml;
     exports com.ranshinban.ranshinban;

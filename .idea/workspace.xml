@@ -9,12 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c272377-77ad-493d-a63c-600ae44b9ff8" name="Changes" comment="Added 3D mapper, fixed bugs with the modify function.">
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="3c272377-77ad-493d-a63c-600ae44b9ff8" name="Changes" comment="Added README and LICENSE">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Wireless/httpClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/BLE/Scanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/BLE/Scanner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Localization/BeaconMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Localization/BeaconMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Localization/BeaconRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Localization/BeaconRegister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Localization/RssiCalibrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Localization/RssiCalibrator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/utils/SerialHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/utils/SerialHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +37,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="0c5d416b-3466-46e5-a31a-4952bdf94966" />
-  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;abdellah2288&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/abdellah2288/Ranshinban&quot;,
+    &quot;accountId&quot;: &quot;1d109d91-afb7-494c-9c77-00ac4dc803c1&quot;
+  }
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -71,10 +86,10 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -95,12 +110,6 @@
     <configuration name="start application" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.ranshinban.ranshinban.Main__" />
       <module name="ranshinban" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="Ranshinban" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -211,8 +220,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
       </set>
     </attachedChunks>
   </component>
@@ -261,7 +270,15 @@
       <workItem from="1725614477975" duration="8739000" />
       <workItem from="1725641501834" duration="2125000" />
       <workItem from="1725648644188" duration="1659000" />
-      <workItem from="1725696724544" duration="1174000" />
+      <workItem from="1725696724544" duration="3395000" />
+      <workItem from="1725705074212" duration="4117000" />
+      <workItem from="1725721344605" duration="112000" />
+      <workItem from="1725721464140" duration="941000" />
+      <workItem from="1725789709675" duration="6021000" />
+      <workItem from="1725810509325" duration="2472000" />
+      <workItem from="1725824388720" duration="2825000" />
+      <workItem from="1725878597249" duration="14891000" />
+      <workItem from="1725902336237" duration="4946000" />
     </task>
     <task id="LOCAL-00001" summary="Added 3D mapper, fixed bugs with the modify function.">
       <option name="closed" value="true" />
@@ -271,7 +288,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725643536136</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added README and LICENSE">
+      <option name="closed" value="true" />
+      <created>1725697933439</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1725697933439</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,6 +315,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added 3D mapper, fixed bugs with the modify function." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added 3D mapper, fixed bugs with the modify function." />
+    <MESSAGE value="Added README and LICENSE" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added README and LICENSE" />
   </component>
 </project>
