@@ -44,3 +44,4 @@ To calibrate a BLE beacon:
 ### Mapping
 
 The mapper displays a real time 2D map of the estimations. Naturally, knowing only the distance D between the beacon and the scanner will give us a circle of radius D where the scanner is positioned relative to the beacon. In order to get an estimate of the scanner's position in 3D space, at least 3 beacons are needed. The environmental constant or path loss exponent accounts for losses in the environment and should be tuned for better results.
+The user may log mapping data by clicking on the **Enable logging** button.
