@@ -1,4 +1,7 @@
-![ranshinban-256x256](https://github.com/user-attachments/assets/93c66ebf-15c6-436d-baed-4c632f3f9556) 
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/93c66ebf-15c6-436d-baed-4c632f3f9556" />
+</p>
 # Hoshi no Ranshinban (Star Compass)
 
 **Hoshi no Ranshinban**, or "Star Compass," is an open-source BLE Indoor Localization Assistant. It enables precise benchmarking and calibration of BLE beacons, using RSSI and trilateration to estimate device positions relative to reference beacons. The project offers an intuitive interface for real-time testing, calibration, and visualization, making it an ideal tool for developers and researchers working on indoor positioning systems.
