@@ -38,7 +38,7 @@ import java.util.HashMap;
 public class Scanner
 {
     static private volatile Beacon[] scannedBeacons = null;
-    static private TableView<Beacon> scannedBeaconsTable = new TableView<>();
+    static private final TableView<Beacon> scannedBeaconsTable = new TableView<>();
 
     static private Button registeredBeaconsButton;
     static private Button rssiCalibrationButton;
@@ -46,16 +46,16 @@ public class Scanner
     static private Button serialConnectButton;
     static private Button connectButton;
 
-    static private SVGPath serialSVG = new SVGPath();
-    static private SVGPath internetSVG = new SVGPath();
+    static private final SVGPath serialSVG = new SVGPath();
+    static private final SVGPath internetSVG = new SVGPath();
 
-    static private  TextField urlField = new TextField();
+    static private final TextField urlField = new TextField();
 
-    static private  ComboBox serialBox = new ComboBox();
+    static private final ComboBox serialBox = new ComboBox();
 
     static private ImageView scannerIcon;
 
-    static private Thread scannerThread = new Thread(()->
+    static private final Thread scannerThread = new Thread(()->
     {
         while(true)
         {
@@ -91,7 +91,7 @@ public class Scanner
                     }
                 }
                 updateScannedBeaconTable();
-                Thread.sleep(501);
+                Thread.sleep(500);
             }
                 Thread.sleep(16);
             }

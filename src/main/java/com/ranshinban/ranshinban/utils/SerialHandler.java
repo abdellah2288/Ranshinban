@@ -8,8 +8,8 @@ import java.nio.charset.StandardCharsets;
 public class SerialHandler
 {
     static final String scanCutOff = "END";
-    static private StringBuilder scannerBuffer = new StringBuilder();
-    static private StringBuilder debugBuffer = new StringBuilder();
+    static private final StringBuilder scannerBuffer = new StringBuilder();
+    static private final StringBuilder debugBuffer = new StringBuilder();
 
     static private String scanBuffer = null;
     static private SerialPort currentPort = null;

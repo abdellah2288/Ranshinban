@@ -8,10 +8,7 @@ import com.lemmingapex.trilateration.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Point3D;
-import javafx.scene.Camera;
-import javafx.scene.Group;
-import javafx.scene.PerspectiveCamera;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 
@@ -43,32 +40,32 @@ public class BeaconMapper
 {
     static private volatile double environmentalConstant = 2.0;
     static private double circleResolution = 200.0;
-    static private volatile HashMap<Beacon,XYChart.Series<Number,Number>> beaconData = new HashMap<>();
+    static private final HashMap<Beacon,XYChart.Series<Number,Number>> beaconData = new HashMap<>();
 
     static private volatile boolean triLaterate = false;
-    static private volatile XYChart.Series target = new XYChart.Series<>();
+    static private final XYChart.Series target = new XYChart.Series<>();
 
-    static private NumberAxis xAxis = new NumberAxis();
-    static private NumberAxis yAxis = new NumberAxis();
+    static private final NumberAxis xAxis = new NumberAxis();
+    static private final NumberAxis yAxis = new NumberAxis();
 
-    static private LineChart<Number,Number> beaconMap = new LineChart<>(xAxis, yAxis);
-    static private HashMap<Beacon,Sphere> mapper3DObjects = new HashMap<>();
+    static private final LineChart<Number,Number> beaconMap = new LineChart<>(xAxis, yAxis);
+    static private final HashMap<Beacon,Sphere> mapper3DObjects = new HashMap<>();
 
-    static private  TableView<Beacon> beaconTable = new TableView<>();
+    static private final TableView<Beacon> beaconTable = new TableView<>();
 
-    static private Stage mainStage = new Stage();
-    static private Stage mapper3DStage = new Stage();
+    static private final Stage mainStage = new Stage();
+    static private final Stage mapper3DStage = new Stage();
 
-    static private Group mapper3DContainer = new Group();
+    static private final Group mapper3DContainer = new Group();
 
-    static private Scene mapper3DScene = new Scene(mapper3DContainer);
+    static private final Scene mapper3DScene = new Scene(mapper3DContainer);
 
-    static private Button trilaterateButton = new Button("▶");
-    static private Button logDataButton = new Button("Enable logging");
+    static private final Button trilaterateButton = new Button("▶");
+    static private final Button logDataButton = new Button("Enable logging");
 
-    static private Label positionLabel = new Label("");
+    static private final Label positionLabel = new Label("");
 
-    static private final double  SCALE_FACTOR_3D = 25;
+    static private final double  SCALE_FACTOR_3D = 5;
 
     static private boolean loggingEnabled = false;
 
@@ -213,6 +210,7 @@ public class BeaconMapper
                                 if(beaconMap.getData().contains(beaconData.get(selectedBeacon)))
                                 {
                                     beaconMap.getData().remove(beaconData.get(selectedBeacon));
+                                    beaconData.remove(selectedBeacon);
                                 }
                                 else
                                 {
@@ -340,7 +338,6 @@ public class BeaconMapper
                 for(Beacon beacon : beaconData.keySet())
                 {
                     XYChart.Data[] newSeries = drawBeaconCircle(beacon);
-
                     if(newSeries != null)
                     {
                         if(triLaterate && beaconData.keySet().size() >= 2)
@@ -395,6 +392,7 @@ public class BeaconMapper
                             beaconData.get(beacon).getData().addAll(newSeries);
                             if(mapper3DStage.isShowing())
                             {
+                                System.out.println("3D MAPPING: " + beacon.getMacAddress());
                                 if(mapper3DObjects.get(beacon) == null)
                                 {
                                     mapper3DObjects.put(beacon,new Sphere());
@@ -410,7 +408,6 @@ public class BeaconMapper
                                 {
                                     mapper3DContainer.getChildren().add(mapper3DObjects.get(beacon));
                                 }
-
                             }
                             beaconTable.refresh();
                         }

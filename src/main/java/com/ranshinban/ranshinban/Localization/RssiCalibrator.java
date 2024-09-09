@@ -26,24 +26,24 @@ public class RssiCalibrator
 {
     static private volatile Beacon selectedBeacon = null;
 
-    static private volatile  NumberAxis rssiValues = new NumberAxis();
-    static private volatile NumberAxis sampleCount = new NumberAxis();
+    static private final NumberAxis rssiValues = new NumberAxis();
+    static private final NumberAxis sampleCount = new NumberAxis();
 
-    static private ScatterChart<Number,Number> rssiPlot = new ScatterChart(sampleCount,rssiValues);
-    static private XYChart.Series<Number,Number> rssiSeries = new XYChart.Series<>();
+    static private final ScatterChart<Number,Number> rssiPlot = new ScatterChart(sampleCount,rssiValues);
+    static private final XYChart.Series<Number,Number> rssiSeries = new XYChart.Series<>();
 
-    static private TextField averageField = new TextField();
-    static private TextField sampleCountField = new TextField();
+    static private final TextField averageField = new TextField();
+    static private final TextField sampleCountField = new TextField();
 
-    static private ListView<Beacon> beaconList = new ListView<>();
+    static private final ListView<Beacon> beaconList = new ListView<>();
 
     static private volatile int sampleCounter = 0;
 
-    static private Button getReferenceButton = new Button("Start Calibration");
+    static private final Button getReferenceButton = new Button("Start Calibration");
 
-    static private ProgressBar calibrationProgress = new ProgressBar();
+    static private final ProgressBar calibrationProgress = new ProgressBar();
 
-    static private Stage mainStage = new Stage();
+    static private final Stage mainStage = new Stage();
 
     static private volatile boolean calibrating = false;
 
@@ -157,7 +157,7 @@ public class RssiCalibrator
             if(e.getClickCount() >= 2 &&
                     beaconList.getSelectionModel().getSelectedItem() != null)
             {
-                Beacon beacon = (Beacon) beaconList.getSelectionModel().getSelectedItem();
+                Beacon beacon = beaconList.getSelectionModel().getSelectedItem();
                 beaconName.setText(beacon.getDeviceName());
                 beaconAddress.setText(beacon.getMacAddress());
                 absoluteX.setText(String.valueOf(beacon.getxCoordinate()));

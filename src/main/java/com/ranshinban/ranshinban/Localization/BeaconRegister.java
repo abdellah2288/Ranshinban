@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 
 public class BeaconRegister
 {
-    static private ArrayList<Beacon> registeredBeacons = new ArrayList<> ();
+    static private final ArrayList<Beacon> registeredBeacons = new ArrayList<> ();
     static private ListView<Beacon> beaconList = null;
     static private final File beaconDB = new File(System.getProperty("user.home")+"/Documents/Ranshinban","beaconDB");
 
@@ -322,7 +322,7 @@ public class BeaconRegister
         removeButton.setOnAction(
                 e->
                 {
-                    removeBeacon((Beacon) beaconList.getSelectionModel().getSelectedItem());
+                    removeBeacon(beaconList.getSelectionModel().getSelectedItem());
                     beaconList.getItems().remove(beaconList.getSelectionModel().getSelectedItem());
                 });
 
@@ -346,73 +346,7 @@ public class BeaconRegister
         stage.show();
 
     }
-    static private void showBeaconProperties(Beacon beacon)
-    {
-        if(beacon == null) return;
 
-        VBox root = new VBox();
-        Scene mainScene = new Scene(root);
-        Stage stage = new Stage();
-
-        Label beaconInfo = new Label();
-        beaconInfo.setText("Name: " + beacon.getDeviceName() + "\n"
-        + "MAC Address: " + beacon.getMacAddress() + "\n"
-        + "X coordinate: " + beacon.getxCoordinate() + "\n"
-        + "Y coordinate: " + beacon.getyCoordinate() + "\n"
-        );
-        beaconInfo.setTextAlignment(TextAlignment.LEFT);
-
-        root.getChildren().add(beaconInfo);
-        root.setPadding(new Insets(10,10,10,10));
-
-        stage.setScene(mainScene);
-        stage.setTitle("Beacon Properties");
-        stage.sizeToScene();
-        stage.setResizable(false);
-        stage.show();
-    }
-    private static void rewriteBeaconDB()
-    {
-
-        if( registeredBeacons.size() == 0 || registeredBeacons.get(0) == null)
-        {
-            try
-            {
-                synchronized (beaconDB)
-                {
-                    if(!beaconDB.exists())
-                    {
-                        beaconDB.getParentFile().mkdir();
-                        beaconDB.createNewFile();
-                    }
-
-                    FileWriter fileWriter = new FileWriter(beaconDB,false);
-                    fileWriter.write("");
-                    fileWriter.close();
-                }
-            }
-            catch (Exception e)
-            {
-                errorWindow.raiseErrorWindow(e.getMessage());
-                System.out.println(e.getStackTrace());
-            }
-        }
-        else
-        {
-            Beacon first = registeredBeacons.get(0);
-            registerBeacon(first
-                    ,false
-                    ,true
-            );
-            for(Beacon beacon : registeredBeacons.subList(1, registeredBeacons.size()))
-            {
-                registerBeacon(beacon
-                        ,true
-                        ,true
-                );
-            }
-        }
-    }
     static private void removeBeacon(Beacon beacon)
     {
         registeredBeacons.remove(beacon);
@@ -486,7 +420,7 @@ public class BeaconRegister
                     }
                     else
                     {
-                        lines.add(beacon.getDeviceName() + "," + beacon.getMacAddress() + "," + beacon.getxCoordinate() + "," + beacon.getyCoordinate() +"," + beacon.getReferenceRSSI() + ";\n");
+                        lines.add(beacon.getDeviceName() + "," + beacon.getMacAddress() + "," + beacon.getxCoordinate() + "," + beacon.getyCoordinate() + "," + beacon.getzCoordinate() +"," + beacon.getReferenceRSSI() + ";\n");
                     }
                     line = reader.readLine();
                 }

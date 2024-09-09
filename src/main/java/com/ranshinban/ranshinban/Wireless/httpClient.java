@@ -7,11 +7,13 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import java.nio.charset.StandardCharsets;
+
 public class httpClient
 {
-    private static CloseableHttpClient mainClient = HttpClientBuilder.create().build();
+    private static final CloseableHttpClient mainClient = HttpClientBuilder.create().build();
     private static volatile boolean activated = false;
-    private static SimpleStringProperty responseProperty = new SimpleStringProperty();
+    private static final SimpleStringProperty responseProperty = new SimpleStringProperty();
 
     static public int requestBeaconList(String url) throws Exception
     {
@@ -19,7 +21,7 @@ public class httpClient
             {
                 HttpResponse httpResponse = mainClient.execute(new HttpGet("http://" + url), response ->
                 {
-                    responseProperty.setValue(new String(response.getEntity().getContent().readAllBytes(),"UTF-8"));
+                    responseProperty.setValue(new String(response.getEntity().getContent().readAllBytes(), StandardCharsets.UTF_8));
                     return response;
                 });
                 if(httpResponse.getStatusLine().getStatusCode() != 200)
@@ -27,7 +29,7 @@ public class httpClient
                     errorWindow.raiseErrorWindow("HTTP ERROR: "
                             + httpResponse.getStatusLine().getStatusCode()
                             + "\nGOT RESPONSE: \n"
-                            + new String(httpResponse.getEntity().getContent().readAllBytes(),"UTF-8")
+                            + new String(httpResponse.getEntity().getContent().readAllBytes(), StandardCharsets.UTF_8)
                     );
                 }
             }
