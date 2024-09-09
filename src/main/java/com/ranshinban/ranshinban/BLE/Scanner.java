@@ -91,7 +91,7 @@ public class Scanner
                     }
                 }
                 updateScannedBeaconTable();
-                Thread.sleep(500);
+                Thread.sleep(501);
             }
                 Thread.sleep(16);
             }

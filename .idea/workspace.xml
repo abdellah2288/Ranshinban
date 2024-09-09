@@ -9,10 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c272377-77ad-493d-a63c-600ae44b9ff8" name="Changes" comment="Added HTTP support, removed serial debug button, visual retouch.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="3c272377-77ad-493d-a63c-600ae44b9ff8" name="Changes" comment="Fixed HTTP scan delay.">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/BLE/Scanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ranshinban/ranshinban/BLE/Scanner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +96,7 @@
       <command value="mvn javafx:jlink" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.start application">
+  <component name="RunManager" selected="Maven.Dotonbori [package]">
     <configuration name="start application" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.ranshinban.ranshinban.Main__" />
       <module name="ranshinban" />
@@ -271,7 +268,7 @@
       <workItem from="1725810509325" duration="2472000" />
       <workItem from="1725824388720" duration="2825000" />
       <workItem from="1725878597249" duration="14891000" />
-      <workItem from="1725902336237" duration="8119000" />
+      <workItem from="1725902336237" duration="9720000" />
     </task>
     <task id="LOCAL-00001" summary="Added 3D mapper, fixed bugs with the modify function.">
       <option name="closed" value="true" />
@@ -297,7 +294,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725907599221</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fixed HTTP scan delay.">
+      <option name="closed" value="true" />
+      <created>1725911246317</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1725911246317</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,6 +323,7 @@
     <MESSAGE value="Added 3D mapper, fixed bugs with the modify function." />
     <MESSAGE value="Added README and LICENSE" />
     <MESSAGE value="Added HTTP support, removed serial debug button, visual retouch." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added HTTP support, removed serial debug button, visual retouch." />
+    <MESSAGE value="Fixed HTTP scan delay." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed HTTP scan delay." />
   </component>
 </project>
