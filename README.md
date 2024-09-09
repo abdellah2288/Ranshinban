@@ -35,7 +35,7 @@ In the scan list, double clicking a beacon will popup a registration window. The
 
 Some devices don't advertise their transmitted (not to be confused with transmit) power. So in order to get over that, the application provides the user with a calibration helper.
 To calibrate a BLE beacon:
--**Place the scanner 1 meter away from the beacon**
+- **Place the scanner 1 meter away from the beacon**
 - **Register the beacon**: See section above
 - **Refresh the beacon list**: Click on the refresh button in the calibration helper window, this will show a list of registered beacons, double on a beacon to calibrate it.
 - **Insert a sample count**: The calibration helper averages the rssi over the number of samples taken, the average is what will be used as the reference RSSI for distance estimation.
@@ -45,3 +45,9 @@ To calibrate a BLE beacon:
 
 The mapper displays a real time 2D map of the estimations. Naturally, knowing only the distance D between the beacon and the scanner will give us a circle of radius D where the scanner is positioned relative to the beacon. In order to get an estimate of the scanner's position in 3D space, at least 3 beacons are needed. The environmental constant or path loss exponent accounts for losses in the environment and should be tuned for better results.
 The user may log mapping data by clicking on the **Enable logging** button.
+The 3D mapper uses the following controls:
+- **W/S** : Zoom in / Zoom out
+- **Q/E** : Rotate around the Y Axis
+- **A/D** : Rotate around the X Axis
+- **R/F** : Rotate arounf the Z Axis
+![img.png](img.png)
