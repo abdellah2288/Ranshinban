@@ -50,4 +50,7 @@ The 3D mapper uses the following controls:
 - **Q/E** : Rotate around the Y Axis
 - **A/D** : Rotate around the X Axis
 - **R/F** : Rotate arounf the Z Axis
+
+## Screenshots
+
 ![img.png](img.png)
