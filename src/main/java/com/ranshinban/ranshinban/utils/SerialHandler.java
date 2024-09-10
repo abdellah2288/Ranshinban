@@ -38,7 +38,8 @@ public class SerialHandler
                         serialPort.readBytes(recievedData, recievedData.length);
                         scannerBuffer.append(new String(recievedData, StandardCharsets.UTF_8));
                         debugBuffer.append(new String(recievedData, StandardCharsets.UTF_8));
-                        if(scannerBuffer.toString().contains(scanCutOff))
+
+                        if(scannerBuffer.indexOf(scanCutOff) != -1)
                         {
                             scanBuffer = scannerBuffer.toString();
                             scannerBuffer.delete(0, scannerBuffer.length());
@@ -47,12 +48,17 @@ public class SerialHandler
                 }
         );
 
-        return serialPort.openPort();
+        return serialPort.isOpen();
     }
 
     static public void closePort()
     {
-        if(currentPort != null) currentPort.closePort();
+        if(currentPort != null)
+        {
+            currentPort.removeDataListener();
+            currentPort.flushIOBuffers();
+            currentPort.closePort();
+        }
         scannerBuffer.setLength(0);
         scanBuffer = null;
         currentPort = null;

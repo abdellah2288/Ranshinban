@@ -1,6 +1,8 @@
 package com.ranshinban.ranshinban.Wireless;
 
 import com.ranshinban.ranshinban.utils.errorWindow;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -12,12 +14,12 @@ import java.nio.charset.StandardCharsets;
 public class httpClient
 {
     private static final CloseableHttpClient mainClient = HttpClientBuilder.create().build();
-    private static volatile boolean activated = false;
+    private static volatile BooleanProperty activated = new SimpleBooleanProperty(false);
     private static final SimpleStringProperty responseProperty = new SimpleStringProperty();
 
     static public int requestBeaconList(String url) throws Exception
     {
-            if(activated)
+            if(activated.getValue())
             {
                 HttpResponse httpResponse = mainClient.execute(new HttpGet("http://" + url), response ->
                 {
@@ -42,13 +44,13 @@ public class httpClient
     }
     static public void activateClient()
     {
-        activated = true;
+        activated.setValue(true);
     }
     static public void deactivateClient()
     {
-        activated = false;
+        activated.setValue(false);
     }
-    static public boolean isActivated()
+    static public BooleanProperty getActivatedProperty()
     {
         return activated;
     }

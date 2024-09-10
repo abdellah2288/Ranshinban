@@ -30,6 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.util.StringConverter;
+import org.controlsfx.control.ToggleSwitch;
 import org.controlsfx.glyphfont.FontAwesome;
 
 import java.util.ArrayList;
@@ -43,11 +44,8 @@ public class Scanner
     static private Button registeredBeaconsButton;
     static private Button rssiCalibrationButton;
     static private Button generateMapButton;
-    static private Button serialConnectButton;
-    static private Button connectButton;
-
-    static private final SVGPath serialSVG = new SVGPath();
-    static private final SVGPath internetSVG = new SVGPath();
+    static private ToggleSwitch serialConnectButton;
+    static private ToggleSwitch connectButton;
 
     static private final TextField urlField = new TextField();
 
@@ -59,7 +57,6 @@ public class Scanner
     {
         while(true)
         {
-            Platform.runLater(() -> scannerIcon.setVisible(SerialHandler.portOpen() || httpClient.isActivated()));
             try
             {
             while (SerialHandler.portOpen())
@@ -79,7 +76,7 @@ public class Scanner
                 }
                 updateScannedBeaconTable();
             }
-            while(httpClient.isActivated())
+            while(httpClient.getActivatedProperty().getValue())
             {
                 httpClient.requestBeaconList(urlField.getText());
                 scannedBeacons = stringToBeacon(httpClient.getResponseProperty().get());
@@ -97,12 +94,11 @@ public class Scanner
             }
             catch (Exception e)
             {
-                httpClient.deactivateClient();
                 SerialHandler.closePort();
                 Platform.runLater(()->
                 {
-                    serialConnectButton.setGraphic(GlyphsDude.createIcon(FontAwesomeIcon.TOGGLE_OFF,"2em"));
-                    connectButton.setGraphic(GlyphsDude.createIcon(FontAwesomeIcon.TOGGLE_OFF,"2em"));
+                    connectButton.setSelected(false);
+                    serialConnectButton.setSelected(false);
                     errorWindow.raiseErrorWindow(e.getMessage());
                 });
 
@@ -162,16 +158,8 @@ public class Scanner
         registeredBeaconsButton = new Button("Browse");
         rssiCalibrationButton = new Button("Calibrate");
         generateMapButton = new Button("Map");
-        serialConnectButton = new Button();
-        connectButton = new Button();
-
-        serialConnectButton.setGraphic(GlyphsDude.createIcon(FontAwesomeIcon.TOGGLE_OFF,"2em"));
-        serialConnectButton.getStyleClass().clear();
-        serialConnectButton.setStyle(null);
-
-        connectButton.setGraphic(GlyphsDude.createIcon(FontAwesomeIcon.TOGGLE_OFF,"2em"));
-        connectButton.getStyleClass().clear();
-        connectButton.setStyle(null);
+        serialConnectButton = new ToggleSwitch();
+        connectButton = new ToggleSwitch();
 
         registeredBeaconsButton.prefWidthProperty().bind(controlsWidth);
         rssiCalibrationButton.prefWidthProperty().bind(controlsWidth);
@@ -242,41 +230,39 @@ public class Scanner
                                }
         );
 
-
-        connectButton.setOnAction(e ->
+        httpClient.getActivatedProperty().bind(connectButton.selectedProperty());
+        connectButton.selectedProperty().addListener((observable, oldValue, newValue) ->
         {
-            if(httpClient.isActivated())
+            if(newValue.booleanValue())
             {
-                httpClient.deactivateClient();
-                connectButton.setGraphic(GlyphsDude.createIcon(FontAwesomeIcon.TOGGLE_OFF,"2em"));
+                SerialHandler.closePort();
+                serialConnectButton.setSelected(false);
+            }
+        });
+
+        serialConnectButton.selectedProperty().addListener((observable, oldValue, newValue) ->
+        {
+            if(newValue.booleanValue())
+            {
+                if(serialBox.getSelectionModel().getSelectedItem() == null)
+                {
+                    errorWindow.raiseErrorWindow("No Serial port selected");
+                    serialConnectButton.setSelected(false);
+                    return;
+                }
+                SerialHandler.openPort((SerialPort) serialBox.getSelectionModel().getSelectedItem(),115200);
+                if(!SerialHandler.portOpen())
+                {
+                    errorWindow.raiseErrorWindow("Could not open port");
+                    serialConnectButton.setSelected(false);
+                    return;
+                }
+                connectButton.setSelected(false);
             }
             else
             {
                 SerialHandler.closePort();
-                serialConnectButton.setGraphic(GlyphsDude.createIcon(FontAwesomeIcon.TOGGLE_OFF,"2em"));
-                connectButton.setGraphic(GlyphsDude.createIcon(FontAwesomeIcon.TOGGLE_ON,"2em"));
-                httpClient.activateClient();
             }
-        });
-        serialConnectButton.setOnAction(e ->
-        {
-           if(serialBox.getSelectionModel().getSelectedItem() == null)
-           {
-               errorWindow.raiseErrorWindow("No Serial port selected");
-               return;
-           }
-           if(SerialHandler.portOpen())
-           {
-               SerialHandler.closePort();
-               serialConnectButton.setGraphic(GlyphsDude.createIcon(FontAwesomeIcon.TOGGLE_OFF,"2em"));
-           }
-           else
-           {
-               httpClient.deactivateClient();
-               SerialHandler.openPort((SerialPort) serialBox.getSelectionModel().getSelectedItem(),115200);
-               serialConnectButton.setGraphic(GlyphsDude.createIcon(FontAwesomeIcon.TOGGLE_ON,"2em"));
-               connectButton.setGraphic(GlyphsDude.createIcon(FontAwesomeIcon.TOGGLE_OFF,"2em"));
-           }
         });
 
         registeredBeaconsButton.setOnAction(
@@ -332,6 +318,8 @@ public class Scanner
         controlBox.getChildren().addAll(controlGrid,separator,scannerIcon);
         vbox.getChildren().addAll(controlBox, scannedBeaconsTable);
 
+        scannerIcon.visibleProperty().bind(connectButton.selectedProperty().or(serialConnectButton.selectedProperty()));
+
         scannerThread.start();
 
         return vbox;
@@ -355,7 +343,7 @@ public class Scanner
     }
     static public Boolean isActive()
     {
-        return SerialHandler.portOpen() || httpClient.isActivated();
+        return SerialHandler.portOpen() || httpClient.getActivatedProperty().getValue();
     }
     static public Beacon getBeacon(String address,boolean checkIfNew)
     {
